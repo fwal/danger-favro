@@ -1,6 +1,6 @@
 # danger-favro
 
-A description of danger-favro.
+A [Danger](http://danger.systems) plugin that detect [Favro](https://favro.com) tickets referenced in code or PR title and displays basic information about them.
 
 ## Installation
 
