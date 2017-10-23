@@ -6,11 +6,11 @@ require 'favro/gem_version.rb'
 Gem::Specification.new do |spec|
   spec.name          = 'danger-favro'
   spec.version       = Favro::VERSION
-  spec.authors       = ['']
-  spec.email         = ['']
+  spec.authors       = ['Frederik Wallner']
+  spec.email         = ['frederik.wallner@gmail.com']
   spec.description   = %q{A short description of danger-favro.}
   spec.summary       = %q{A longer description of danger-favro.}
-  spec.homepage      = 'https://github.com//danger-favro'
+  spec.homepage      = 'https://github.com/fwal/danger-favro'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'danger-plugin-api', '~> 1.0'
+  spec.add_runtime_dependency 'rest-client', '~> 2.0'
 
   # General ruby development
   spec.add_development_dependency 'bundler', '~> 1.3'
@@ -28,8 +29,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.4'
 
   # Linting code and docs
-  spec.add_development_dependency "rubocop", "~> 0.41"
-  spec.add_development_dependency "yard", "~> 0.8"
+  spec.add_development_dependency 'rubocop', '~> 0.41'
+  spec.add_development_dependency 'yard', '~> 0.8'
+  spec.add_development_dependency 'coveralls', '~> 0.8.21'
 
   # Makes testing easy via `bundle exec guard`
   spec.add_development_dependency 'guard', '~> 2.14'
