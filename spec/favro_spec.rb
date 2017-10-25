@@ -12,24 +12,15 @@ module Danger
         @my_plugin = @dangerfile.favro
       end
 
-      it "should throw errors when missing user_name" do
+      it "should throw errors when missing values" do
         @my_plugin.check
-        expect(@dangerfile.status_report[:errors]).to eq(["Danger Favro plugin: Missing `user_name`"])
-      end
-
-      it "should throw errors when missing api_token" do
-        @my_plugin.check(user_name: "test")
-        expect(@dangerfile.status_report[:errors]).to eq(["Danger Favro plugin: Missing `api_token`"])
-      end
-
-      it "should throw errors when missing organization_id" do
-        @my_plugin.check(user_name: "test", api_token: "test")
-        expect(@dangerfile.status_report[:errors]).to eq(["Danger Favro plugin: Missing `organization_id`"])
-      end
-
-      it "should throw errors when missing key" do
-        @my_plugin.check(user_name: "test", api_token: "test", organization_id: "test")
-        expect(@dangerfile.status_report[:errors]).to eq(["Danger Favro plugin: Missing `key`"])
+        errors = [
+          "Danger Favro plugin: Missing `user_name`",
+          "Danger Favro plugin: Missing `api_token`",
+          "Danger Favro plugin: Missing `organization_id`",
+          "Danger Favro plugin: Missing `key`"
+        ]
+        expect(@dangerfile.status_report[:errors]).to eq(errors)
       end
     end
 

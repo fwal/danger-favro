@@ -11,16 +11,7 @@ module Danger
     # @return   [Array<String>]
     #
     def check(user_name: nil, api_token: nil, organization_id: nil, key: nil)
-      @user_name = user_name || ENV["DANGER_FAVRO_USER_NAME"]
-      @api_token = api_token || ENV["DANGER_FAVRO_API_TOKEN"]
-      @organization_id = organization_id || ENV["DANGER_FAVRO_ORGANIZATION_ID"]
-      @key = key || ENV["DANGER_FAVRO_KEY"]
-      @issue_pattern = /(?<ticket>(#{@key})-(\d+))+/i
-
-      fail("Danger Favro plugin: Missing `user_name`") && return if @user_name.nil? || @user_name.empty?
-      fail("Danger Favro plugin: Missing `api_token`") && return if @api_token.nil? || @api_token.empty?
-      fail("Danger Favro plugin: Missing `organization_id`") && return if @organization_id.nil? || @organization_id.empty?
-      fail("Danger Favro plugin: Missing `key`") && return if @key.nil? || @key.empty?
+      return unless setup(user_name, api_token, organization_id, key)
 
       ids = find_ticket_ids([title] + file_additions)
 
@@ -35,6 +26,37 @@ module Danger
     end
 
     private
+
+    def setup(user_name, api_token, organization_id, key)
+      @user_name = user_name || ENV["DANGER_FAVRO_USER_NAME"]
+      @api_token = api_token || ENV["DANGER_FAVRO_API_TOKEN"]
+      @organization_id = organization_id || ENV["DANGER_FAVRO_ORGANIZATION_ID"]
+      @key = key || ENV["DANGER_FAVRO_KEY"]
+      @issue_pattern = /(?<ticket>(#{@key})-(\d+))+/i
+
+      is_valid = true
+      if @user_name.nil? || @user_name.empty?
+        is_valid = false
+        fail("Danger Favro plugin: Missing `user_name`")
+      end
+
+      if @api_token.nil? || @api_token.empty?
+        is_valid = false
+        fail("Danger Favro plugin: Missing `api_token`")
+      end
+
+      if @organization_id.nil? || @organization_id.empty?
+        is_valid = false
+        fail("Danger Favro plugin: Missing `organization_id`")
+      end
+
+      if @key.nil? || @key.empty?
+        is_valid = false
+        fail("Danger Favro plugin: Missing `key`")
+      end
+
+      is_valid
+    end
 
     def title
       case danger.scm_provider
