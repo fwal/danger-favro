@@ -22,7 +22,6 @@ module Danger
   # @see  /danger-favro
   # @tags favro issues tickets
   class DangerFavro < Plugin
-
     # Check for tickets.
     #
     # @param [String] user_name
