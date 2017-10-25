@@ -9,6 +9,8 @@ require "pry"
 require "rspec"
 require "danger"
 
+require "webmock/rspec"
+
 require "coveralls"
 Coveralls.wear!
 
@@ -65,4 +67,42 @@ end
 def testing_dangerfile
   env = Danger::EnvironmentManager.new(testing_env)
   Danger::Dangerfile.new(env, testing_ui)
+end
+
+# Sets pr title
+def testing_pr_title(dangerfile, title = "A title")
+  allow(dangerfile.github).to receive(:pr_title).and_return(title)
+end
+
+# Prepares tests for an api request
+def testing_api_request(id)
+  fixture = File.read(File.expand_path("../fixtures/api_response.json", __FILE__))
+  stub_request(:get, "https://favro.com/api/v1/cards?cardSequentialId=#{id}&unique=true&limit=1")
+    .to_return(body: fixture, status: 200)
+end
+
+# Sets git changes
+def testing_changes(dangerfile, added_text: "//new", modified_text: "//modified")
+  modified = Git::Diff::DiffFile.new(
+    "base",
+    path:  "modified_dummy.rb",
+    patch: "- #{modified_text}"
+  )
+  added = Git::Diff::DiffFile.new(
+    "base",
+    path:  "new_dummy.rb",
+    patch: "+ #{added_text}"
+  )
+
+  allow(dangerfile.git).to receive(:diff_for_file)
+    .with("modified_dummy.rb").and_return(modified)
+
+  allow(dangerfile.git).to receive(:diff_for_file)
+    .with("new_dummy.rb").and_return(added)
+
+  allow(dangerfile.git).to receive(:modified_files)
+    .and_return(["modified_dummy.rb"])
+
+  allow(dangerfile.git).to receive(:added_files)
+    .and_return(["new_dummy.rb"])
 end
