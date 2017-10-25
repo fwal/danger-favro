@@ -1,4 +1,4 @@
-require 'rest-client'
+require "rest-client"
 
 module Danger
   class ApiClient
