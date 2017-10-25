@@ -1,0 +1,25 @@
+{
+  "limit": 1,
+  "page": 0,
+  "pages": 1,
+  "requestId": "8cc57b1d8a218fa639c8a0fa",
+  "entities": [{
+      "cardId": "67973f72db34592d8fc96c48",
+      "organizationId": "zk4CJpg5uozhL4R2W",
+      "widgetCommonId": "ff440e8f358c08513a86c8d6",
+      "columnId": "b4d8c6283d9d58f9a39108e7",
+      "name": "This is a card",
+      "customFields": [{
+          "customFieldId": "kj4qQzhLMJ73dybBR",
+          "total": 50400000,
+          "reports": {
+              "XTdS5bP6qX9Ta3rwt": {
+                  "reportId": "29ed6478b55f90d91c5f4727",
+                  "createdAt": "2016-01-13T00:00:00.000Z",
+                  "value": 50400000,
+                  "description": "Timesheet report description"
+              }
+          }
+      }]
+  }]
+}
