@@ -1,15 +1,35 @@
 module Danger
+  # This is a danger plugin that detects Favro tickets in added code and pr titles
+  #
+  # @example Initiate the check
+  #
+  #          favro.check(
+  #            user_name: "api-user",
+  #            api_token: "api-token",
+  #            organization_id: "org-id",
+  #            key: "Test"
+  #          )
+  #
+  # @example Environment variables can also be used.
+  #
+  #          ENV["DANGER_FAVRO_USER_NAME"] = "api-user"
+  #          ENV["DANGER_FAVRO_API_TOKEN"] = "api-token"
+  #          ENV["DANGER_FAVRO_ORGANIZATION_ID"] = "org-id"
+  #
+  #          favro.check(key: "Test")
+  #
+  #
   # @see  /danger-favro
-  # @tags favro
+  # @tags favro issues tickets
   class DangerFavro < Plugin
-    # Ticket key, the part that comes before the ticket number
-    #
-    # @return   [Array<String>]
-    attr_accessor :key
 
-    # A method that you can call from your Dangerfile
-    # @return   [Array<String>]
+    # Check for tickets.
     #
+    # @param [String] user_name
+    # @param [String] api_token
+    # @param [String] organization_id
+    # @param [String] key
+    # @return   [void]
     def check(user_name: nil, api_token: nil, organization_id: nil, key: nil)
       return unless setup(user_name, api_token, organization_id, key)
 
