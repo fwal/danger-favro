@@ -12,7 +12,7 @@ module Danger
       tickets = []
       ticket_ids.each do |id|
         response = request(id)
-        tickets << Ticket.new(id, response.nil? ? nil : response["entities"][0]["name"])
+        tickets << Ticket.new(id, response.nil? ? "<i>(unknown)</i>" : response["entities"][0]["name"])
       end
       tickets
     end
