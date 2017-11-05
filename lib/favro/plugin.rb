@@ -131,7 +131,7 @@ module Danger
     end
 
     def render_row(ticket)
-"   <tr>
+      "   <tr>
       <td><a href=\"https://favro.com/card/#{@organization_id}/#{ticket.id}\">#{ticket.id}</a></td>
       <td>#{ticket.name}</td>
     </tr>"
