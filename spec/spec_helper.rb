@@ -106,3 +106,8 @@ def testing_changes(dangerfile, added_text: "//new", modified_text: "//modified"
   allow(dangerfile.git).to receive(:added_files)
     .and_return(["new_dummy.rb"])
 end
+
+# Comment table fixture
+def comment_table
+  File.read(File.expand_path("../fixtures/comment_table.html", __FILE__)).delete("\n")
+end
