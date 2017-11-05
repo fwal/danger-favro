@@ -43,7 +43,7 @@ module Danger
         expect(@dangerfile.status_report[:errors]).to eq([])
       end
 
-      it "detects tickets in added lines" do
+      it "detects cards in added lines" do
         testing_changes(@dangerfile, added_text: "//TEST-123")
         testing_api_request("TEST-123")
 
@@ -51,14 +51,14 @@ module Danger
         expect(@dangerfile.status_report[:markdowns][0].message.delete("\n")).to eq(comment_table)
       end
 
-      it "doesn't detect tickets in removed lines" do
+      it "doesn't detect cards in removed lines" do
         testing_changes(@dangerfile, modified_text: "//TEST-1234")
 
         @my_plugin.check
         expect(@dangerfile.status_report[:markdowns]).to eq([])
       end
 
-      it "retrieves the name of detected tickets" do
+      it "retrieves the name of detected cards" do
         testing_changes(@dangerfile, added_text: "//TEST-123")
         testing_api_request("TEST-123")
 
@@ -67,7 +67,7 @@ module Danger
       end
 
       context "on GitHub PR" do
-        it "detects Favro ticket in PR title" do
+        it "detects Favro card in PR title" do
           testing_pr_title(@dangerfile, "TEST-123")
           testing_api_request("TEST-123")
 

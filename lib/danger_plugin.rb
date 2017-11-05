@@ -1,3 +1,3 @@
-require "favro/ticket"
+require "favro/card"
 require "favro/api_client"
 require "favro/plugin"
