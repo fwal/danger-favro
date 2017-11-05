@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Favro::VERSION
   spec.authors       = ["Frederik Wallner"]
   spec.email         = ["frederik.wallner@gmail.com"]
-  spec.description   = "Detect Favro tickets in PRs"
-  spec.summary       = "A Danger plugin that detect Favro tickets referenced in code or PR title and displays basic information about them."
+  spec.description   = "Detect Favro cards in PRs"
+  spec.summary       = "A Danger plugin that detect Favro cards referenced in code or PR title and displays basic information about them."
   spec.homepage      = "https://github.com/fwal/danger-favro"
   spec.license       = "MIT"
 

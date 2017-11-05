@@ -1,5 +1,5 @@
 module Danger
-  # This is a danger plugin that detects Favro tickets in added code and pr titles
+  # This is a danger plugin that detects Favro cards in added code and pr titles
   #
   # @example Initiate the check
   #
@@ -20,9 +20,9 @@ module Danger
   #
   #
   # @see  /danger-favro
-  # @tags favro issues tickets
+  # @tags favro issues cards
   class DangerFavro < Plugin
-    # Check for tickets.
+    # Check for cards.
     #
     # @param [String] user_name
     # @param [String] api_token
@@ -32,14 +32,14 @@ module Danger
     def check(user_name: nil, api_token: nil, organization_id: nil, key: nil)
       return unless setup(user_name, api_token, organization_id, key)
 
-      ids = find_ticket_ids([title] + file_additions)
+      ids = find_card_ids([title] + file_additions)
 
       return if ids.empty?
 
       client = ApiClient.new(@user_name, @api_token, @organization_id)
-      tickets = client.get(ids)
+      cards = client.get(ids)
 
-      render_table(tickets)
+      render_table(cards)
     end
 
     private
@@ -49,7 +49,7 @@ module Danger
       @api_token = api_token || ENV["DANGER_FAVRO_API_TOKEN"]
       @organization_id = organization_id || ENV["DANGER_FAVRO_ORGANIZATION_ID"]
       @key = key || ENV["DANGER_FAVRO_KEY"]
-      @issue_pattern = /(?<ticket>(#{@key})-(\d+))+/i
+      @issue_pattern = /(?<card>(#{@key})-(\d+))+/i
 
       is_valid = true
       if @user_name.nil? || @user_name.empty?
@@ -98,7 +98,7 @@ module Danger
       additions
     end
 
-    def find_ticket_ids(list)
+    def find_card_ids(list)
       matches = []
 
       list.each do |item|
@@ -108,7 +108,7 @@ module Danger
       matches.uniq.collect(&:upcase)
     end
 
-    def render_table(tickets)
+    def render_table(cards)
       table = "
 <table>
   <thead>
@@ -116,13 +116,13 @@ module Danger
       <th width=\"10%\">
       </th>
       <th width=\"50%\">
-        #{tickets.length} Favro ticket#{tickets.length > 1 ? 's' : ''} referenced
+        #{cards.length} Favro card#{cards.length > 1 ? 's' : ''} referenced
       </th>
     </tr>
   </thead>
   <tbody>
 "
-      table << tickets.map { |ticket| render_row(ticket) }.join("\n")
+      table << cards.map { |card| render_row(card) }.join("\n")
       table << "
   </tbody>
 </table>"
@@ -130,10 +130,10 @@ module Danger
       markdown table
     end
 
-    def render_row(ticket)
+    def render_row(card)
       "   <tr>
-      <td><a href=\"https://favro.com/card/#{@organization_id}/#{ticket.id}\">#{ticket.id}</a></td>
-      <td>#{ticket.name}</td>
+      <td><a href=\"https://favro.com/card/#{@organization_id}/#{card.id}\">#{card.id}</a></td>
+      <td>#{card.name}</td>
     </tr>"
     end
   end

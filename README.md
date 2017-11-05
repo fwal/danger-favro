@@ -2,7 +2,7 @@
 [![Build Status](https://img.shields.io/travis/fwal/danger-favro.svg)](https://travis-ci.org/fwal/danger-favro)
 [![Coveralls](https://img.shields.io/coveralls/fwal/danger-favro.svg)](https://coveralls.io/github/fwal/danger-favro)
 
-A [Danger](http://danger.systems) plugin that detect [Favro](https://favro.com) tickets referenced in code or PR title and displays basic information about them.
+A [Danger](http://danger.systems) plugin that detect [Favro](https://favro.com) cards referenced in code or PR title and displays basic information about them.
 
 ## Installation
 
