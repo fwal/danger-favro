@@ -48,14 +48,14 @@ module Danger
         testing_api_request("TEST-123")
 
         @my_plugin.check
-        expect(@dangerfile.status_report[:messages]).to eq(["1 Favro ticket referenced"])
+        expect(@dangerfile.status_report[:markdowns][0].message.delete("\n")).to eq(comment_table)
       end
 
       it "doesn't detect tickets in removed lines" do
         testing_changes(@dangerfile, modified_text: "//TEST-1234")
 
         @my_plugin.check
-        expect(@dangerfile.status_report[:messages]).to eq([])
+        expect(@dangerfile.status_report[:markdowns]).to eq([])
       end
 
       it "retrieves the name of detected tickets" do
@@ -63,7 +63,7 @@ module Danger
         testing_api_request("TEST-123")
 
         @my_plugin.check
-        expect(@dangerfile.status_report[:markdowns][0].message).to eq("### Favro tickets \nID | Name |\n| --- | ----- |\n[TEST-123](https://favro.com/card/test_org/TEST-123) | This is a card")
+        expect(@dangerfile.status_report[:markdowns][0].message.delete("\n")).to eq(comment_table)
       end
 
       context "on GitHub PR" do
@@ -72,7 +72,7 @@ module Danger
           testing_api_request("TEST-123")
 
           @my_plugin.check
-          expect(@dangerfile.status_report[:messages]).to eq(["1 Favro ticket referenced"])
+          expect(@dangerfile.status_report[:markdowns][0].message.delete("\n")).to eq(comment_table)
         end
       end
     end

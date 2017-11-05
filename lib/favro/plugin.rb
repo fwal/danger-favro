@@ -36,8 +36,6 @@ module Danger
 
       return if ids.empty?
 
-      message "#{ids.length} Favro ticket#{ids.length > 1 ? 's' : ''} referenced"
-
       client = ApiClient.new(@user_name, @api_token, @organization_id)
       tickets = client.get(ids)
 
@@ -111,15 +109,32 @@ module Danger
     end
 
     def render_table(tickets)
-      table = "### Favro tickets \n"
-      table << "ID | Name |\n"
-      table << "| --- | ----- |\n"
+      table = "
+<table>
+  <thead>
+    <tr>
+      <th width=\"10%\">
+      </th>
+      <th width=\"50%\">
+        #{tickets.length} Favro ticket#{tickets.length > 1 ? 's' : ''} referenced
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+"
       table << tickets.map { |ticket| render_row(ticket) }.join("\n")
+      table << "
+  </tbody>
+</table>"
+
       markdown table
     end
 
     def render_row(ticket)
-      "[#{ticket.id}](https://favro.com/card/#{@organization_id}/#{ticket.id}) | #{ticket.name}"
+      "   <tr>
+      <td><a href=\"https://favro.com/card/#{@organization_id}/#{ticket.id}\">#{ticket.id}</a></td>
+      <td>#{ticket.name}</td>
+    </tr>"
     end
   end
 end
