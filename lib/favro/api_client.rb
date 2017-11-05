@@ -22,8 +22,6 @@ module Danger
     def request(ticket_id)
       response = RestClient::Request.execute method: :get, url: "https://favro.com/api/v1/cards?cardSequentialId=#{ticket_id}&unique=true&limit=1", headers: { accept: :json, organizationId: @organization_id }, user: @user_name, password: @api_token
       JSON.parse(response)
-    rescue RestClient::ExceptionWithResponse
-      nil
     end
   end
 end
