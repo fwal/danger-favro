@@ -5,6 +5,8 @@
 
 A [Danger](http://danger.systems) plugin that detect [Favro](https://favro.com) cards referenced in code or PR title and displays basic information about them.
 
+### Example
+
 <img alt="Example" src="docs/comment-example.png" />
 
 ### Usage
