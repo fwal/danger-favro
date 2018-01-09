@@ -24,23 +24,23 @@ Gem::Specification.new do |spec|
 
   # General ruby development
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", "~> 12.3.0"
 
   # Testing support
   spec.add_development_dependency "rspec", "~> 3.4"
-  spec.add_development_dependency "webmock", "~>3.1.0"
+  spec.add_development_dependency "webmock", "~>3.2.1"
 
   # Linting code and docs
   spec.add_development_dependency "coveralls", "~> 0.8.21"
-  spec.add_development_dependency "rubocop", "~> 0.41"
-  spec.add_development_dependency "yard", "~> 0.8"
+  spec.add_development_dependency "rubocop", "~> 0.52.1"
+  spec.add_development_dependency "yard", "~> 0.9.12"
 
   # Makes testing easy via `bundle exec guard`
   spec.add_development_dependency "guard", "~> 2.14"
   spec.add_development_dependency "guard-rspec", "~> 4.7"
 
   # If you want to work on older builds of ruby
-  spec.add_development_dependency "listen", "3.0.7"
+  spec.add_development_dependency "listen", "~> 3.1.5"
 
   # This gives you the chance to run a REPL inside your tests
   # via:

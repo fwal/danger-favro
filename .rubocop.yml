@@ -3,7 +3,7 @@
 # If you don't like these settings, just delete this file :)
 
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.4
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -134,6 +134,9 @@ Layout/IndentHeredoc:
   Enabled: false
 
 Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 PercentLiteralDelimiters:
