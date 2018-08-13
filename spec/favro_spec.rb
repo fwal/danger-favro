@@ -66,6 +66,16 @@ module Danger
         expect(@dangerfile.status_report[:markdowns][0].message.delete("\n")).to eq(comment_table)
       end
 
+      it "doesn't report duplicate favro cards" do
+        testing_pr_title(@dangerfile, "test-123")
+        testing_changes(@dangerfile, added_text: "//TEST-123")
+        testing_changes(@dangerfile, added_text: "//TesT-123")
+        testing_api_request("TEST-123")
+
+        @my_plugin.check
+        expect(@dangerfile.status_report[:markdowns][0].message.delete("\n")).to eq(comment_table)
+      end
+
       context "on GitHub PR" do
         it "detects Favro card in PR title" do
           testing_pr_title(@dangerfile, "TEST-123")
