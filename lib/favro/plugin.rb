@@ -105,7 +105,7 @@ module Danger
         matches += item.scan(@issue_pattern).flatten
       end
 
-      matches.uniq.collect(&:upcase)
+      matches.collect(&:upcase).uniq
     end
 
     def render_table(cards)
