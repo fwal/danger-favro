@@ -1,3 +1,8 @@
+> **Warning**
+> This repository is no longer maintained
+
+---
+
 # danger-favro
 [![Build Status](https://img.shields.io/travis/fwal/danger-favro.svg)](https://travis-ci.org/fwal/danger-favro)
 [![Coveralls](https://img.shields.io/coveralls/fwal/danger-favro.svg)](https://coveralls.io/github/fwal/danger-favro)
